@@ -1,0 +1,2 @@
+# multyDataSourceManager
+多数据源管理服务后台，并提供统一对多数据源进行增删改查接口
