@@ -2,19 +2,20 @@ package com.amanoisuno.dynamicdatasource.config.factory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.amanoisuno.dynamicdatasource.common.api.Page;
 import com.amanoisuno.dynamicdatasource.model.BaseObjectModel;
-import com.amanoisuno.dynamicdatasource.model.PageModel;
+import com.amanoisuno.dynamicdatasource.model.QueryModel;
 import com.amanoisuno.dynamicdatasource.service.BaseService;
 import com.amanoisuno.dynamicdatasource.service.BaseServiceImpl;
-import com.amanoisuno.dynamicdatasource.test1.domain.Lamp_UserEntity;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Iterator;
 
 @Component
 public class ServiceAction implements BaseServiceAction{
@@ -47,7 +48,15 @@ public class ServiceAction implements BaseServiceAction{
     @Override
     public Object queryList(BaseObjectModel baseObjectModel) throws IllegalAccessException {
         BaseServiceImpl iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
-        QueryWrapper queryWrapper = iService.createQueryWrapper(baseObjectModel.getData());
+
+        // 将list中的数据转成json字符串
+        String jsonObject= JSON.toJSONString(baseObjectModel.getData());
+        //将json转成需要的对象
+        QueryModel queryModel = JSONObject.parseObject(jsonObject, QueryModel.class);
+
+//        QueryWrapper queryWrapper = iService.createQueryWrapper(queryModel.getPageObject());
+
+        QueryWrapper queryWrapper = queryModel.getLikeQuery();
 
         return iService.list(queryWrapper);
     }
@@ -58,9 +67,15 @@ public class ServiceAction implements BaseServiceAction{
         // 将list中的数据转成json字符串
         String jsonObject= JSON.toJSONString(baseObjectModel.getData());
         //将json转成需要的对象
-        PageModel pageModel= JSONObject.parseObject(jsonObject, PageModel.class);
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<Object> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageModel.getPageNum(), pageModel.getPageSize());
-        QueryWrapper queryWrapper = iService.createQueryWrapper(pageModel.getPageObject());
+        QueryModel queryModel = JSONObject.parseObject(jsonObject, QueryModel.class);
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<Object> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(queryModel.getPageNum(), queryModel.getPageSize());
+//        IPage<Object> page = queryModel.getPage();
+//        QueryWrapper queryWrapper = iService.createQueryWrapper(queryModel.getPageObject());
+
+//        if (!StringUtils.isEmpty(queryModel.getLikeObject())){
+//            queryModel.getLikeQuery(queryWrapper);
+//        }
+        QueryWrapper queryWrapper = queryModel.getLikeQuery();
 
         return iService.page(page, queryWrapper);
     }
@@ -71,4 +86,16 @@ public class ServiceAction implements BaseServiceAction{
 
         return iService.getById((Serializable) baseObjectModel.getData());
     }
+
+//    private String[] getFiledName(Object o) {
+//        Field[] fields = o.getClass().getDeclaredFields();
+//        String[] fieldNames = new String[fields.length];
+//        for (int i = 0; i < fields.length; i++) {
+//            System.out.println(fields[i].getType());
+//            fieldNames[i] = fields[i].getName();
+//        }
+//        return fieldNames;
+//    }
+
+
 }
