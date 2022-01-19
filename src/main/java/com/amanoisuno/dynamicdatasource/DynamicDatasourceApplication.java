@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.spring.web.SpringfoxWebMvcConfiguration;
@@ -24,6 +25,7 @@ import java.net.InetAddress;
 @ConditionalOnClass(SpringfoxWebMvcConfiguration.class)
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @MapperScan("com.amanoisuno.dynamicdatasource")
+@EnableTransactionManagement(proxyTargetClass = true)
 @Slf4j
 public class DynamicDatasourceApplication implements WebMvcConfigurer {
 

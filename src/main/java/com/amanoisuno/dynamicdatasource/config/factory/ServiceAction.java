@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -32,9 +34,15 @@ public class ServiceAction implements BaseServiceAction{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Object update(BaseObjectModel baseObjectModel) throws IllegalAccessException {
         BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
-        iService.updateById(baseObjectModel.getData());
+        try{
+            iService.updateById(baseObjectModel.getData());
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+
         return baseObjectModel.getData();
     }
 
