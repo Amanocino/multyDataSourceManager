@@ -1,0 +1,37 @@
+#spring:
+#  profiles:
+#    active: test #默认运行环境
+#  application:
+#    name: dynamic-datasource-core
+#    #Redis的配置
+#  redis:
+#    host: 172.16.0.20 # Redis服务器地址
+##    database: 3 # Redis数据库索引（默认为0）
+#    port: 6379 # Redis服务器连接端口
+#    password: redispwd # Redis服务器连接密码（默认为空）
+#    jedis:
+#      pool:
+#        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+#        max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#        max-idle: 8 # 连接池中的最大空闲连接
+#        min-idle: 0 # 连接池中的最小空闲连接
+#      timeout: 3000ms # 连接超时时间（毫秒）
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 172.16.0.35:8848  #Nacos 链接地址
+#        namespace: db7e9f2d-4b3c-4f8b-b1b1-696a1862112f #Nacos 命名空间ID
+#      config:
+#        server-addr: 172.16.0.35:8848  #Nacos 链接地址
+#        namespace: db7e9f2d-4b3c-4f8b-b1b1-696a1862112f #Nacos 命名空间ID
+#        group: DEFAULT_GROUP  # 默认分组就是DEFAULT_GROUP，如果使用默认分组可以不配置
+#        file-extension: yml   #默认properties
+#
+
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+[2022-02-15 15:56:18.334] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 15:56:18.406] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 15:56:20.489] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core] & group[DEFAULT_GROUP]
+[2022-02-15 15:56:20.502] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core.yml] & group[DEFAULT_GROUP]
+[2022-02-15 15:56:31.725] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 15:56:31.737] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 16:00:05.287] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[108 line] - [HttpClientBeanHolder] Start destroying common HttpClient
+[2022-02-15 16:00:05.290] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[136 line] - [NotifyCenter] Start destroying Publisher
+[2022-02-15 16:00:05.293] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[153 line] - [NotifyCenter] Destruction of the end
+[2022-02-15 16:00:05.295] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[114 line] - [HttpClientBeanHolder] Destruction of the end
+[2022-02-15 16:00:05.811] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:00:05.811] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:00:05.812] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:00:05.812] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:00:15.279] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 16:00:15.336] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 16:00:17.456] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core] & group[DEFAULT_GROUP]
+[2022-02-15 16:00:17.477] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core.yml] & group[DEFAULT_GROUP]
+[2022-02-15 16:00:28.926] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 16:00:28.939] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 16:00:53.131] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[108 line] - [HttpClientBeanHolder] Start destroying common HttpClient
+[2022-02-15 16:00:53.136] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[136 line] - [NotifyCenter] Start destroying Publisher
+[2022-02-15 16:00:53.136] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[153 line] - [NotifyCenter] Destruction of the end
+[2022-02-15 16:00:53.144] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[114 line] - [HttpClientBeanHolder] Destruction of the end
+[2022-02-15 16:00:53.679] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:00:53.679] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:00:53.680] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:00:53.680] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:01:02.989] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 16:01:03.114] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 16:01:05.180] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core] & group[DEFAULT_GROUP]
+[2022-02-15 16:01:05.190] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core.yml] & group[DEFAULT_GROUP]
+[2022-02-15 16:01:17.069] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 16:01:17.083] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 16:01:53.100] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[136 line] - [NotifyCenter] Start destroying Publisher
+[2022-02-15 16:01:53.102] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[153 line] - [NotifyCenter] Destruction of the end
+[2022-02-15 16:01:53.103] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[108 line] - [HttpClientBeanHolder] Start destroying common HttpClient
+[2022-02-15 16:01:53.105] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[114 line] - [HttpClientBeanHolder] Destruction of the end
+[2022-02-15 16:01:53.651] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:01:53.652] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:01:53.652] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:01:53.652] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:02:02.520] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 16:02:02.613] [WARN ]: org.reflections.Reflections.scan[179 line] - given scan urls are empty. set urls in the configuration
+[2022-02-15 16:02:04.674] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core] & group[DEFAULT_GROUP]
+[2022-02-15 16:02:04.684] [WARN ]: com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData[87 line] - Ignore the empty nacos configuration and get it based on dataId[dynamic-datasource-core.yml] & group[DEFAULT_GROUP]
+[2022-02-15 16:02:15.346] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 16:02:15.356] [WARN ]: com.netflix.config.sources.URLConfigurationSource.<init>[126 line] - No URLs will be polled as dynamic configuration sources.
+[2022-02-15 16:03:41.765] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[108 line] - [HttpClientBeanHolder] Start destroying common HttpClient
+[2022-02-15 16:03:41.773] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[136 line] - [NotifyCenter] Start destroying Publisher
+[2022-02-15 16:03:41.774] [WARN ]: com.alibaba.nacos.common.notify.NotifyCenter.shutdown[153 line] - [NotifyCenter] Destruction of the end
+[2022-02-15 16:03:41.774] [WARN ]: com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown[114 line] - [HttpClientBeanHolder] Destruction of the end
+[2022-02-15 16:03:42.403] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:03:42.403] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:03:42.404] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[72 line] - [NamingHttpClientManager] Start destroying NacosRestTemplate
+[2022-02-15 16:03:42.405] [WARN ]: com.alibaba.nacos.client.naming.remote.http.NamingHttpClientManager.shutdown[79 line] - [NamingHttpClientManager] Destruction of the end
+[2022-02-15 16:03:42.468] [WARN ]: com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService.onDisConnect[82 line] - Grpc connection disconnect, mark to redo
+[2022-02-15 16:03:42.469] [WARN ]: com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService.onDisConnect[89 line] - mark to redo completed

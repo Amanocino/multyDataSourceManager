@@ -1,0 +1,87 @@
+#spring:
+#  profiles:
+#    active: test #默认运行环境
+#  application:
+#    name: dynamic-datasource-core
+#    #Redis的配置
+#  redis:
+#    host: 172.16.0.20 # Redis服务器地址
+##    database: 3 # Redis数据库索引（默认为0）
+#    port: 6379 # Redis服务器连接端口
+#    password: redispwd # Redis服务器连接密码（默认为空）
+#    jedis:
+#      pool:
+#        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+#        max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#        max-idle: 8 # 连接池中的最大空闲连接
+#        min-idle: 0 # 连接池中的最小空闲连接
+#      timeout: 3000ms # 连接超时时间（毫秒）
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 172.16.0.35:8848  #Nacos 链接地址
+#        namespace: db7e9f2d-4b3c-4f8b-b1b1-696a1862112f #Nacos 命名空间ID
+#      config:
+#        server-addr: 172.16.0.35:8848  #Nacos 链接地址
+#        namespace: db7e9f2d-4b3c-4f8b-b1b1-696a1862112f #Nacos 命名空间ID
+#        group: DEFAULT_GROUP  # 默认分组就是DEFAULT_GROUP，如果使用默认分组可以不配置
+#        file-extension: yml   #默认properties
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#
+## 服务端口
+#server:
+#  port: 8124
+#
+## 默认动态数据源配置
+#dynamic-datasource:
+#  default:
+#    url: jdbc:mysql://172.16.0.20:3306/lamp?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&serverTimezone=UTC&allowMultiQueries=true
+#    username: root
+#    password: mysqlpasswd
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#
+#    connectionInitSqls: SELECT 1 FROM DUAL
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    filters: stat,wall,log4j
+#    initialSize: 5
+#    maxActive: 50
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    maxWait: 60001
+#    minEvictableIdleTimeMillis: 300000
+#    minIdle: 5
+#    poolPreparedStatements: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    testWhileIdle: true
+#    timeBetweenEvictionRunsMillis: 60000
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    useGlobalDataSourceStat: true
+#    validationQuery: SELECT 1 FROM DUAL
+#
+##mybatis-plus配置控制台打印完整带参数SQL语句
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    map-underscore-to-camel-case: false # 禁止大写变小写时自动添加下划线
+#
+## 自定义redis key
+#redis:
+#  key:
+#    prefix:
+#      authCode: "dynamic-datasource:authCode:"
+#    expire:
+#      authCode: 120 # 验证码超期时间
+
+
+
+
+
+
+
+
