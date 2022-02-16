@@ -5,9 +5,17 @@
 "outPath": "D:/download/test1", //指定文档的输出路径,maven插件不需要，gradle插件必须
 "packageFilters": "org.example.controller.*",//controller包过滤，多个包用英文逗号隔开
 "projectName": "数据中心",//配置自己的项目名称
-"appToken": "93d9e56123524877b59433bd61b1d61b", //torna平台appToken,@since 2.0.9
+"appToken": "e3d0ef32a799472f898afa668478099c", //torna平台appToken,@since 2.0.9
 "openUrl": "http://172.16.0.20:7700/api",//torna平台地址，填写自己的私有化部署地址@since 2.0.9
 "debugEnvName":"数据中心", //torna测试环境
-"replace": true,//推送torna时替换旧的文档
+"replace": false,//推送torna时替换旧的文档
+"revisionLogs": [{ //文档变更记录，非必须
+  "version": "1.0", //文档版本号
+  "revisionTime": "2020-12-31 10:30", //文档修订时间
+  "status": "update", //变更操作状态，一般为：创建、更新等
+  "author": "author", //文档变更作者
+  "remarks": "desc" //变更描述
+}
+],
 "debugEnvUrl":"http://172.16.0.20"//torna
 }

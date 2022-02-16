@@ -7,12 +7,14 @@ import org.example.model.QueryModel;
 import org.example.service.BaseService;
 import org.example.service.BaseServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.example.utils.ObjectSwitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Component
 public class ServiceAction implements BaseServiceAction{
@@ -23,12 +25,14 @@ public class ServiceAction implements BaseServiceAction{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Object save(BaseObjectModel baseObjectModel) throws IllegalAccessException {
-        BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
 
         try{
+            BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+
             iService.save(baseObjectModel.getData());
         }catch (Exception e){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw e;
         }
 
         return baseObjectModel.getData();
@@ -37,11 +41,13 @@ public class ServiceAction implements BaseServiceAction{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Object update(BaseObjectModel baseObjectModel) throws IllegalAccessException {
-        BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
         try{
+            BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+
             iService.updateById(baseObjectModel.getData());
         }catch (Exception e){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw e;
         }
 
         return baseObjectModel.getData();
@@ -49,14 +55,37 @@ public class ServiceAction implements BaseServiceAction{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Object batchUpdate(BaseObjectModel baseObjectModel) throws IllegalAccessException {
-        BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
-//        iService.updateBatchById(baseObjectModel.getObj());
+    public Object batchSave(BaseObjectModel baseObjectModel) throws IllegalAccessException {
+        try{
+            BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+
+//            iService.saveBatch(ObjectSwitch.castList(baseObjectModel.getData(), Object.class));
+            iService.saveBatch((List<Object>)baseObjectModel.getData());
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw e;
+        }
+
         return null;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    public Object batchUpdate(BaseObjectModel baseObjectModel) throws IllegalAccessException {
+        try{
+            BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+
+//            iService.updateBatchById(ObjectSwitch.castList(baseObjectModel.getData(), Object.class));
+            iService.updateBatchById((List<Object>)baseObjectModel.getData());
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw e;
+        }
+
+        return null;
+    }
+
+    @Override
     public Object queryList(BaseObjectModel baseObjectModel) throws IllegalAccessException {
         BaseServiceImpl iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
 
@@ -73,7 +102,6 @@ public class ServiceAction implements BaseServiceAction{
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Object queryPage(BaseObjectModel baseObjectModel) throws IllegalAccessException {
         BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
         // 将list中的数据转成json字符串
@@ -93,7 +121,6 @@ public class ServiceAction implements BaseServiceAction{
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Object queryDetail(BaseObjectModel baseObjectModel) throws IllegalAccessException {
         BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
 
