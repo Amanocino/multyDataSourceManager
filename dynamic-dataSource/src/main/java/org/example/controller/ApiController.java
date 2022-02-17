@@ -1,10 +1,13 @@
 package org.example.controller;
 
+import org.apache.dubbo.config.annotation.DubboService;
+import org.example.Service.DynamicDataSourceService;
+import org.example.common.BaseObjectModel;
 import org.example.common.Dict;
 import org.example.common.ResultJson;
 import org.example.config.factory.ServiceAction;
 import org.example.entity.User;
-import org.example.model.BaseObjectModel;
+//import org.example.model.BaseObjectModel;
 import org.example.service.UserService;
 import org.example.service.impl.DynamicSqlService;
 import io.swagger.annotations.Api;
@@ -61,6 +64,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResultJson save(@RequestBody BaseObjectModel params, HttpServletRequest request) throws Exception {
 
@@ -78,6 +82,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResultJson update(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
@@ -96,6 +101,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/batchSave", method = RequestMethod.POST)
     public ResultJson batchSave(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
@@ -114,6 +120,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/batchUpdate", method = RequestMethod.POST)
     public ResultJson batchUpdate(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
@@ -131,6 +138,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/queryList", method = RequestMethod.POST)
     public ResultJson queryList(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
@@ -148,6 +156,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/queryPage", method = RequestMethod.POST)
     public ResultJson queryPage(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
         int userId=Integer.parseInt(request.getHeader("userId"));
@@ -163,6 +172,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/queryById", method = RequestMethod.POST)
     public ResultJson queryById(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
         int userId=Integer.parseInt(request.getHeader("userId"));
@@ -179,6 +189,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/queryBySql", method = RequestMethod.POST)
     public ResultJson queryBySql(@RequestBody Map<String, Object> params, HttpServletRequest request){
         ResultJson resultJson = new ResultJson();
@@ -209,6 +220,7 @@ public class ApiController {
      * @param request
      * @return
      */
+
     @RequestMapping(value = "/insertOrUpdateBySql", method = RequestMethod.POST)
     public ResultJson insertOrUpdateBySql(@RequestBody Map<String, Object> params, HttpServletRequest request){
         ResultJson resultJson = new ResultJson();

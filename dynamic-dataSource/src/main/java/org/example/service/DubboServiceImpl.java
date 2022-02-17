@@ -8,10 +8,10 @@ import org.example.Service.DynamicDataSourceService;
  * @date : 2022/2/16
  * @time : 17:10
  */
-@DubboService
-public class DubboServiceImpl implements DynamicDataSourceService {
+//@DubboService
+public class DubboServiceImpl  {
 
-    @Override
+//    @Override
     public String sayHello(String name){
         return "Hello World:"+ name;
     }

@@ -12,6 +12,8 @@ spring:
 dubbo:
   cloud:
     subscribed-services: dynamic-datasource-core
+  consumer:
+    timeout: 3000
 # 服务端口
 server:
   port: 8125

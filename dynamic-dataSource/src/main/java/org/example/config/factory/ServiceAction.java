@@ -2,7 +2,10 @@ package org.example.config.factory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.example.model.BaseObjectModel;
+//import org.example.model.BaseObjectModel;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.example.Service.DynamicDataSourceService;
+import org.example.common.BaseObjectModel;
 import org.example.model.QueryModel;
 import org.example.service.BaseService;
 import org.example.service.BaseServiceImpl;
@@ -16,41 +19,55 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import java.io.Serializable;
 import java.util.List;
 
+@DubboService
 @Component
-public class ServiceAction implements BaseServiceAction{
+public class ServiceAction implements DynamicDataSourceService {
     @Autowired
     ServiceFactory serviceFactory;
 
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Object save(BaseObjectModel baseObjectModel) throws IllegalAccessException {
 
         try{
             BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
 
-            iService.save(baseObjectModel.getData());
+            saveObject(iService, baseObjectModel.getData());
         }catch (Exception e){
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             throw e;
         }
 
         return baseObjectModel.getData();
     }
 
-    @Override
     @Transactional(rollbackFor = Exception.class)
-    public Object update(BaseObjectModel baseObjectModel) throws IllegalAccessException {
+    void saveObject(BaseService iService, Object obj) throws IllegalAccessException {
         try{
-            BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
-
-            iService.updateById(baseObjectModel.getData());
+            iService.save(obj);
         }catch (Exception e){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             throw e;
         }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Object update(BaseObjectModel baseObjectModel) throws IllegalAccessException {
+        BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+
+        updateObject(iService, baseObjectModel.getData());
 
         return baseObjectModel.getData();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    void updateObject(BaseService iService, Object obj) throws IllegalAccessException {
+        try{
+            iService.updateById(obj);
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw e;
+        }
     }
 
     @Override

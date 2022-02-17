@@ -1,6 +1,6 @@
 package org.example.config.factory;
 
-import org.example.model.BaseObjectModel;
+import org.example.common.BaseObjectModel;
 
 public interface BaseServiceAction {
     Object save(BaseObjectModel baseObjectModel) throws IllegalAccessException;

@@ -1,5 +1,7 @@
 package org.example.config.aspect;
 
+import org.aspectj.lang.JoinPoint;
+import org.example.common.BaseObjectModel;
 import org.example.config.DynamicDataSource;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,13 +34,14 @@ public class DataSourceAspect {
      * 故数据源切换放在controller层（默认事务应放到service层）
      * //@Pointcut("@annotation(DynamicSwitchDataSource)")
      */
-    @Pointcut("execution(public * org.example.controller..*.*(..))")
+//    @Pointcut("execution(public * org.example.controller..*.*(..))")
+    @Pointcut("execution(public * org.example.config.factory.ServiceAction.*(..))")
     public void dataSourcePointCut() {
     }
 
     @Before("dataSourcePointCut()")
-    public void beforeExecute() {
-        String tenantId = getTenantIdFromSession();
+    public void beforeExecute(JoinPoint joinPoint) {
+        String tenantId = getTenantIdFromSession(joinPoint);
         if (tenantId != null) {
             dynamicDataSource.setCurrentThreadDataSource(tenantId);
         }
@@ -51,11 +54,18 @@ public class DataSourceAspect {
     }
 
     //TODO 从session中获取租客id
-    private String getTenantIdFromSession() {
+    private String getTenantIdFromSession(JoinPoint joinPoint) {
         String tenantId ;
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest httpServletRequest = attributes.getRequest();
-        tenantId = httpServletRequest.getHeader("tenantId");
-        return tenantId;
+        //获取目标方法的参数信息
+        Object[] obj = joinPoint.getArgs();
+        for (Object argItem : obj) {
+            System.out.println("---->now-->argItem:" + argItem);
+            if (argItem instanceof BaseObjectModel) {
+                BaseObjectModel paramVO = (BaseObjectModel) argItem;
+                return paramVO.getTenantId().toString();
+            }
+            System.out.println("---->after-->argItem:" + argItem);
+        }
+        return null;
     }
 }
