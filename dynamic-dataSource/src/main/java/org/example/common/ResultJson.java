@@ -58,6 +58,18 @@ public class ResultJson {
         this.message = message;
     }
 
+    public ResultJson success(String message) {
+        this.result = Dict.REQUEST_SUCCEED;
+        this.message = message;
+        return this;
+    }
+
+    public ResultJson error(String message) {
+        this.result = Dict.REQUEST_FAIL;
+        this.message = message;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "ResultJson{" +

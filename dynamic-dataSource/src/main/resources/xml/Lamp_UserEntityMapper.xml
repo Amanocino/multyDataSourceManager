@@ -9,4 +9,10 @@
         <result column="tenant_id" property="tenant_id" />
     </resultMap>
 
+    <insert id="saveBatchCustom">
+        INSERT INTO `user`(`name`) VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.name})
+        </foreach>
+    </insert>
 </mapper>

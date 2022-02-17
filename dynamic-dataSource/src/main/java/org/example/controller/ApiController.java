@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "多租户管理端--用户模块")
-public class UserController {
+public class ApiController {
 
     @Autowired
     private ServiceAction serviceAction;
@@ -62,21 +62,13 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResultJson save(@RequestBody BaseObjectModel params, HttpServletRequest request){
-        ResultJson resultJson = new ResultJson();
+    public ResultJson save(@RequestBody BaseObjectModel params, HttpServletRequest request) throws Exception {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
+        Object obj = serviceAction.save(params);
+        ResultJson resultJson = new ResultJson().success("新增成功");
 
-        try {
-
-            Object obj = serviceAction.save(params);
-            resultJson.setResult(Dict.REQUEST_SUCCEED);
-            resultJson.setMessage("新增成功");
-            resultJson.setData(obj);
-        } catch (Exception e) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-
-        }
+        resultJson.setData(obj);
         return resultJson;
     }
 
@@ -87,21 +79,32 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultJson update(@RequestBody BaseObjectModel params, HttpServletRequest request){
-        ResultJson resultJson = new ResultJson();
+    public ResultJson update(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
 
-        try {
+        Object obj = serviceAction.update(params);
+        ResultJson resultJson = new ResultJson().success("编辑成功");
 
-            Object obj = serviceAction.update(params);
-            resultJson.setResult(Dict.REQUEST_SUCCEED);
-            resultJson.setMessage("编辑成功");
-            resultJson.setData(obj);
-        } catch (Exception e) {
+        resultJson.setData(obj);
+        return resultJson;
+    }
 
+    /**
+     * 批量新增数据
+     * @param params
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/batchSave", method = RequestMethod.POST)
+    public ResultJson batchSave(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
-        }
+        int userId=Integer.parseInt(request.getHeader("userId"));
+
+        Object obj = serviceAction.batchSave(params);
+
+        ResultJson resultJson = new ResultJson().success("批量新增成功");
+        resultJson.setData(obj);
         return resultJson;
     }
 
@@ -112,21 +115,13 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/batchUpdate", method = RequestMethod.POST)
-    public ResultJson batchUpdate(@RequestBody BaseObjectModel params, HttpServletRequest request){
-        ResultJson resultJson = new ResultJson();
+    public ResultJson batchUpdate(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
 
-        try {
-
-            Object obj = serviceAction.batchUpdate(params);
-            resultJson.setResult(Dict.REQUEST_SUCCEED);
-            resultJson.setMessage("批量编辑成功");
-            resultJson.setData(obj);
-        } catch (Exception e) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-
-        }
+        Object obj = serviceAction.batchUpdate(params);
+        ResultJson resultJson = new ResultJson().success("批量编辑成功");
+        resultJson.setData(obj);
         return resultJson;
     }
 
@@ -137,21 +132,13 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/queryList", method = RequestMethod.POST)
-    public ResultJson queryList(@RequestBody BaseObjectModel params, HttpServletRequest request){
-        ResultJson resultJson = new ResultJson();
+    public ResultJson queryList(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
 
-        try {
-
-            Object obj = serviceAction.queryList(params);
-            resultJson.setResult(Dict.REQUEST_SUCCEED);
-            resultJson.setMessage("查询成功");
-            resultJson.setData(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
+        Object obj = serviceAction.queryList(params);
+        ResultJson resultJson = new ResultJson().success("查询成功");
+        resultJson.setData(obj);
         return resultJson;
     }
 
@@ -162,21 +149,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/queryPage", method = RequestMethod.POST)
-    public ResultJson queryPage(@RequestBody BaseObjectModel params, HttpServletRequest request){
-        ResultJson resultJson = new ResultJson();
-
+    public ResultJson queryPage(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
         int userId=Integer.parseInt(request.getHeader("userId"));
-
-        try {
-
-            Object obj = serviceAction.queryPage(params);
-            resultJson.setResult(Dict.REQUEST_SUCCEED);
-            resultJson.setMessage("查询成功");
-            resultJson.setData(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
+        Object obj = serviceAction.queryPage(params);
+        ResultJson resultJson = new ResultJson().success("查询成功");
+        resultJson.setData(obj);
         return resultJson;
     }
 
@@ -187,21 +164,12 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/queryById", method = RequestMethod.POST)
-    public ResultJson queryById(@RequestBody BaseObjectModel params, HttpServletRequest request){
-        ResultJson resultJson = new ResultJson();
-
+    public ResultJson queryById(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
         int userId=Integer.parseInt(request.getHeader("userId"));
 
-        try {
-
-            Object obj = serviceAction.queryDetail(params);
-            resultJson.setResult(Dict.REQUEST_SUCCEED);
-            resultJson.setMessage("查询成功");
-            resultJson.setData(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
+        Object obj = serviceAction.queryDetail(params);
+        ResultJson resultJson = new ResultJson().success("查询成功");
+        resultJson.setData(obj);
         return resultJson;
     }
 
@@ -230,7 +198,7 @@ public class UserController {
             resultJson.setData(obj);
         } catch (Exception e) {
             e.printStackTrace();
-
+            throw e;
         }
         return resultJson;
     }
@@ -260,7 +228,7 @@ public class UserController {
             resultJson.setData(obj);
         } catch (Exception e) {
             e.printStackTrace();
-
+            throw e;
         }
         return resultJson;
     }
