@@ -8,6 +8,7 @@
         <module>common</module>
         <module>dynamic-dataSource</module>
         <module>gateway</module>
+        <module>consumer</module>
     </modules>
 
     <parent>
