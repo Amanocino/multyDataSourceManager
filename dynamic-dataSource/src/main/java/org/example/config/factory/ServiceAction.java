@@ -11,7 +11,9 @@ import org.example.service.BaseService;
 import org.example.service.BaseServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.example.utils.ObjectSwitch;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -21,9 +23,12 @@ import java.util.List;
 
 @DubboService
 @Component
-public class ServiceAction implements DynamicDataSourceService {
+public class ServiceAction implements BaseServiceAction, DynamicDataSourceService {
     @Autowired
     ServiceFactory serviceFactory;
+    @Lazy
+    @Autowired
+    ServiceAction serviceAction;
 
 
     @Override
@@ -32,7 +37,7 @@ public class ServiceAction implements DynamicDataSourceService {
         try{
             BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
 
-            saveObject(iService, baseObjectModel.getData());
+            serviceAction.saveObject(iService, baseObjectModel.getData());
         }catch (Exception e){
             throw e;
         }
@@ -41,7 +46,7 @@ public class ServiceAction implements DynamicDataSourceService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    void saveObject(BaseService iService, Object obj) throws IllegalAccessException {
+    public void saveObject(BaseService iService, Object obj) throws IllegalAccessException {
         try{
             iService.save(obj);
         }catch (Exception e){
@@ -51,17 +56,16 @@ public class ServiceAction implements DynamicDataSourceService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Object update(BaseObjectModel baseObjectModel) throws IllegalAccessException {
         BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
 
-        updateObject(iService, baseObjectModel.getData());
+        serviceAction.updateObject(iService, baseObjectModel.getData());
 
         return baseObjectModel.getData();
     }
 
     @Transactional(rollbackFor = Exception.class)
-    void updateObject(BaseService iService, Object obj) throws IllegalAccessException {
+    public void updateObject(BaseService iService, Object obj) throws IllegalAccessException {
         try{
             iService.updateById(obj);
         }catch (Exception e){
@@ -71,35 +75,41 @@ public class ServiceAction implements DynamicDataSourceService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Object batchSave(BaseObjectModel baseObjectModel) throws IllegalAccessException {
-        try{
-            BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+        BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+        serviceAction.batchSaveObject(iService, baseObjectModel.getData());
 
-//            iService.saveBatch(ObjectSwitch.castList(baseObjectModel.getData(), Object.class));
-            iService.saveBatch((List<Object>)baseObjectModel.getData());
+        return baseObjectModel.getData();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void batchSaveObject(BaseService iService, Object obj) throws IllegalAccessException {
+        try{
+            iService.saveBatch((List<Object>)obj);
         }catch (Exception e){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             throw e;
         }
-
-        return null;
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Object batchUpdate(BaseObjectModel baseObjectModel) throws IllegalAccessException {
-        try{
-            BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
+        BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
 
 //            iService.updateBatchById(ObjectSwitch.castList(baseObjectModel.getData(), Object.class));
-            iService.updateBatchById((List<Object>)baseObjectModel.getData());
+        serviceAction.batchUpdateObject(iService, baseObjectModel.getData());
+
+        return baseObjectModel.getData();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void batchUpdateObject(BaseService iService, Object obj) throws IllegalAccessException {
+        try{
+            iService.updateBatchById((List<Object>)obj);
         }catch (Exception e){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             throw e;
         }
-
-        return null;
     }
 
     @Override

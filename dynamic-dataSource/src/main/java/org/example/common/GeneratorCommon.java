@@ -36,7 +36,7 @@ public class GeneratorCommon {
         // 选择 freemarker 引擎，默认 Veloctiy
         //mpg.setTemplateEngine(new FreemarkerTemplateEngine());
 
-        String preFileName = "Anji_";
+        String preFileName = "Banma_";
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setAuthor("ChenZhiCheng");
@@ -81,7 +81,7 @@ public class GeneratorCommon {
       dsc.setDriverName("com.mysql.cj.jdbc.Driver"); //mysql8.0使用
         dsc.setUsername("root");
         dsc.setPassword("mysqlpasswd");
-        dsc.setUrl("jdbc:mysql://172.16.0.20/anji_usermanager?useUnicode=true&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://172.16.0.20:3306/banma?useSSL=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&allowMultiQueries=true");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -109,7 +109,7 @@ public class GeneratorCommon {
      */
     public static PackageConfig getPackageConfig() {
         return new PackageConfig()
-        .setParent("org.example.test2")// 自定义包路径
+        .setParent("org.example.banma")// 自定义包路径
         .setMapper("mapper")// 设置Mapper包名，默认mapper
         .setService("service")// 设置Service包名，默认service
         .setEntity("domain")// 设置Entity包名，默认entity,继承的父类  已序列化

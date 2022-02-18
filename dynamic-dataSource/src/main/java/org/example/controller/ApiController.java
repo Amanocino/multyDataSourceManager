@@ -5,6 +5,7 @@ import org.example.Service.DynamicDataSourceService;
 import org.example.common.BaseObjectModel;
 import org.example.common.Dict;
 import org.example.common.ResultJson;
+import org.example.common.ValidGroup;
 import org.example.config.factory.ServiceAction;
 import org.example.entity.User;
 //import org.example.model.BaseObjectModel;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,9 +68,11 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResultJson save(@RequestBody BaseObjectModel params, HttpServletRequest request) throws Exception {
+    public ResultJson save(@Validated(value = ValidGroup.Crud.Create.class) @RequestBody BaseObjectModel params, HttpServletRequest request) throws Exception {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
         Object obj = serviceAction.save(params);
         ResultJson resultJson = new ResultJson().success("新增成功");
 
@@ -84,10 +88,11 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResultJson update(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
+    public ResultJson update(@Validated(value = ValidGroup.Crud.Update.class) @RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
-
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
         Object obj = serviceAction.update(params);
         ResultJson resultJson = new ResultJson().success("编辑成功");
 
@@ -103,10 +108,11 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/batchSave", method = RequestMethod.POST)
-    public ResultJson batchSave(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
+    public ResultJson batchSave(@Validated(value = ValidGroup.Crud.Create.class) @RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
-
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
         Object obj = serviceAction.batchSave(params);
 
         ResultJson resultJson = new ResultJson().success("批量新增成功");
@@ -122,10 +128,11 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/batchUpdate", method = RequestMethod.POST)
-    public ResultJson batchUpdate(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
+    public ResultJson batchUpdate(@Validated(value = ValidGroup.Crud.Update.class)@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
-
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
         Object obj = serviceAction.batchUpdate(params);
         ResultJson resultJson = new ResultJson().success("批量编辑成功");
         resultJson.setData(obj);
@@ -140,10 +147,11 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/queryList", method = RequestMethod.POST)
-    public ResultJson queryList(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
+    public ResultJson queryList(@Validated(value = ValidGroup.Crud.Query.class)@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
 
         int userId=Integer.parseInt(request.getHeader("userId"));
-
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
         Object obj = serviceAction.queryList(params);
         ResultJson resultJson = new ResultJson().success("查询成功");
         resultJson.setData(obj);
@@ -158,8 +166,10 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/queryPage", method = RequestMethod.POST)
-    public ResultJson queryPage(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
+    public ResultJson queryPage(@Validated(value = ValidGroup.Crud.Query.class)@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
         int userId=Integer.parseInt(request.getHeader("userId"));
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
         Object obj = serviceAction.queryPage(params);
         ResultJson resultJson = new ResultJson().success("查询成功");
         resultJson.setData(obj);
@@ -174,9 +184,10 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/queryById", method = RequestMethod.POST)
-    public ResultJson queryById(@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
+    public ResultJson queryById(@Validated(value = ValidGroup.Crud.Query.class)@RequestBody BaseObjectModel params, HttpServletRequest request) throws IllegalAccessException {
         int userId=Integer.parseInt(request.getHeader("userId"));
-
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
         Object obj = serviceAction.queryDetail(params);
         ResultJson resultJson = new ResultJson().success("查询成功");
         resultJson.setData(obj);
@@ -191,19 +202,21 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/queryBySql", method = RequestMethod.POST)
-    public ResultJson queryBySql(@RequestBody Map<String, Object> params, HttpServletRequest request){
+    public ResultJson queryBySql(@Validated(value = ValidGroup.Crud.QueryStatement.class)@RequestBody BaseObjectModel params, HttpServletRequest request){
         ResultJson resultJson = new ResultJson();
 
         int userId=Integer.parseInt(request.getHeader("userId"));
-        if(params == null
-                || !params.containsKey("sqlStatement") || StringUtils.isEmpty(params.get("sqlStatement"))){
-            resultJson.setResult(Dict.REQUEST_FAIL);
-            resultJson.setMessage("缺少必要参数");
-            return resultJson;
-        }
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
+//        if(params == null
+//                || !params.containsKey("sqlStatement") || StringUtils.isEmpty(params.get("sqlStatement"))){
+//            resultJson.setResult(Dict.REQUEST_FAIL);
+//            resultJson.setMessage("缺少必要参数");
+//            return resultJson;
+//        }
         try {
-            String sqlStatement = null == params.get("sqlStatement") ? "null" : params.get("sqlStatement").toString();
-            LinkedList<Map> obj = dynamicSqlService.dynamicSqlQuery(sqlStatement);
+//            String sqlStatement = null == params.get("sqlStatement") ? "null" : params.get("sqlStatement").toString();
+            LinkedList<Map> obj = dynamicSqlService.dynamicSqlQuery(params);
             resultJson.setResult(Dict.REQUEST_SUCCEED);
             resultJson.setMessage("查询成功");
             resultJson.setData(obj);
@@ -222,19 +235,21 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/insertOrUpdateBySql", method = RequestMethod.POST)
-    public ResultJson insertOrUpdateBySql(@RequestBody Map<String, Object> params, HttpServletRequest request){
+    public ResultJson insertOrUpdateBySql(@Validated(value = ValidGroup.Crud.SaveStatement.class)@RequestBody BaseObjectModel params, HttpServletRequest request){
         ResultJson resultJson = new ResultJson();
 
         int userId=Integer.parseInt(request.getHeader("userId"));
-        if(params == null
-                || !params.containsKey("sqlStatement") || StringUtils.isEmpty(params.get("sqlStatement"))){
-            resultJson.setResult(Dict.REQUEST_FAIL);
-            resultJson.setMessage("缺少必要参数");
-            return resultJson;
-        }
+        int tenantId=Integer.parseInt(request.getHeader("tenantId"));
+        params.setTenantId(tenantId);
+//        if(params == null
+//                || !params.containsKey("sqlStatement") || StringUtils.isEmpty(params.get("sqlStatement"))){
+//            resultJson.setResult(Dict.REQUEST_FAIL);
+//            resultJson.setMessage("缺少必要参数");
+//            return resultJson;
+//        }
         try {
-            String sqlStatement = null == params.get("sqlStatement") ? "null" : params.get("sqlStatement").toString();
-            int obj = dynamicSqlService.dynamicSqlInsert(sqlStatement);
+//            String sqlStatement = null == params.get("sqlStatement") ? "null" : params.get("sqlStatement").toString();
+            int obj = dynamicSqlService.dynamicSqlInsert(params);
             resultJson.setResult(Dict.REQUEST_SUCCEED);
             resultJson.setMessage("新增成功");
             resultJson.setData(obj);

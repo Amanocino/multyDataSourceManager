@@ -36,5 +36,7 @@ DB -->endNormal(("正常结束"))
 ```
 
 #### 六、当前性能效果
-![img_1.png](img_1.png)
 ![img.png](img.png)
+![img_1.png](img_1.png)
+修改校验框架后测试效果
+![img_2.png](img_2.png)

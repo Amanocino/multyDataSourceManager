@@ -15,8 +15,9 @@ public class QueryModel {
     private Integer pageSize;
     private Object pageObject;
     private Object likeObject;
-    private String orderField;
-    private boolean isAsc;
+    private Object orderObject;
+//    private String orderField;
+//    private boolean isAsc;
 
     public IPage<Object> getPage() {
         IPage<Object> page = new Page<Object>(pageNum, pageSize);
@@ -58,10 +59,20 @@ public class QueryModel {
                 queryWrapper.like(key.toString(), value);
             }
         }
-
-        if (!StringUtils.isEmpty(orderField)) {
-            queryWrapper.orderBy(true, isAsc, orderField);
+        if (!StringUtils.isEmpty(orderObject)) {
+            JSONObject res_data=(JSONObject) JSONObject.toJSON(orderObject);
+            Iterator sIterator = res_data.keySet().iterator();
+            while(sIterator.hasNext()){
+                Object key=sIterator.next();   //循环遍历每个key
+                String value = res_data.getString(key.toString());   //获取key里的value
+                Boolean isAsc = value.toUpperCase().equals("ASC")?Boolean.TRUE:Boolean.FALSE;
+                queryWrapper.orderBy(true, isAsc, key);
+            }
         }
+
+//        if (!StringUtils.isEmpty(orderField)) {
+//            queryWrapper.orderBy(true, isAsc, orderField);
+//        }
 
         return queryWrapper;
     }

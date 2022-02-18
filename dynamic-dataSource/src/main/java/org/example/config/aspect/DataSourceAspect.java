@@ -35,7 +35,7 @@ public class DataSourceAspect {
      * //@Pointcut("@annotation(DynamicSwitchDataSource)")
      */
 //    @Pointcut("execution(public * org.example.controller..*.*(..))")
-    @Pointcut("execution(public * org.example.config.factory.ServiceAction.*(..))")
+    @Pointcut("(execution(public * org.example.config.factory.ServiceAction.*(..))) || (execution(public * org.example.service.impl.DynamicSqlService.*(..)))")
     public void dataSourcePointCut() {
     }
 

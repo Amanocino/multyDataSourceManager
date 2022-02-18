@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceFactory implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
-    private String[] articleStringArray = new String[]{"Mes", "Daqing", "Anji", "Nanchang", "Langchao", "Lamp"};
+    private String[] articleStringArray = new String[]{"Mes", "Daqing", "Anji", "Nanchang",
+            "Langchao", "Banma", "Lamp"};
 
 
     public BaseServiceImpl getService(Integer articleId, String tableName) throws IllegalAccessException {
