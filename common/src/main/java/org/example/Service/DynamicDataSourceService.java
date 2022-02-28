@@ -15,7 +15,7 @@ import java.util.Map;
 public interface DynamicDataSourceService {
 //    String sayHello(String name);
 //    public ResultJson save(BaseObjectModel params, HttpServletRequest request) ;
-    Object save(BaseObjectModel baseObjectModel) throws IllegalAccessException;
+    Object save(BaseObjectModel baseObjectModel) throws Exception;
     Object update(BaseObjectModel baseObjectModel) throws IllegalAccessException;
     Object batchSave(BaseObjectModel baseObjectModel) throws IllegalAccessException;
     Object batchUpdate(BaseObjectModel baseObjectModel) throws IllegalAccessException;

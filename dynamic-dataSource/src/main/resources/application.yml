@@ -86,13 +86,79 @@ dubbo:
   protocol:
     name: dubbo
     port: -1
+    host: 192.168.200.150
   registry:
-    address: spring-cloud://localhost
+    address: nacos://172.16.0.35:8848
 spring:
   main:
     allow-bean-definition-overriding: true
+#
+#seata:
+#  enabled: true
+#  application-id: ${spring.application.name}
+#  tx-service-group: my_test_tx_group
+#  grouplist:
+#    default: 172.16.0.20:8091 #seata 服务地址
+#  config:
+#    type: nacos
+#    nacos:
+#      namespace:
+#      serverAddr: 172.16.0.35:8848
+#      group: SEATA_20
+#
+#  registry:
+#    type: nacos
+#    nacos:
+#      application: serverAddr
+#      server-addr: 172.16.0.35:8848
+#      namespace:
+
+#seata:
+#  enabled: true
+#  enableAutoDataSourceProxy: true
+#  client:
+#    tm:
+#      commitRetryCount: '3'
+#      rollbackRetryCount: '3'
+#  config:
+#    nacos:
+#      server-addr: 172.16.0.35:8848
+#      group: SEATA_20
+#    type: nacos
+#  registry:
+#    nacos:
+#      server-addr: 172.16.0.35:8848
+#      group: SEATA_20
+#      application: seata-server
+#    type: nacos
+#  tx-service-group: nacos_service_tx_group
+#  application-id: ${spring.application.name}
 
 
-
-
-
+seata:
+  enabled: true
+  enable-auto-data-source-proxy: true
+  tx-service-group: nacos_service_tx_group
+  grouplist: 172.16.0.20:8091
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 172.16.0.35:8848
+      group: SEATA_20
+      username: nacos
+      password: nacos
+  config:
+    type: nacos
+    nacos:
+      server-addr: 172.16.0.35:8848
+      group: SEATA_20
+      username: nacos
+      password: nacos
+  service:
+    vgroup-mapping:
+      nacos_service_tx_group: default
+    disable-global-transaction: false
+  client:
+    rm:
+      report-success-enable: false

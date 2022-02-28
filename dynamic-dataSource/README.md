@@ -37,6 +37,12 @@ DB -->endNormal(("正常结束"))
 
 #### 六、当前性能效果
 ![img.png](img.png)
-![img_1.png](img_1.png)
-修改校验框架后测试效果
-![img_2.png](img_2.png)
+![img_1.png](img_1.png)  
+修改校验框架后测试效果  
+![img_2.png](img_2.png)  
+通过消费者接口转多数据源接口请求结果  
+![img_5.png](img_5.png)  
+加入AT模式分布式事务后直接请求多数据源接口结果  
+![img_3.png](img_3.png)  
+加入AT模式后通过消费者接口转多数据源接口请求结果  
+![img_4.png](img_4.png)

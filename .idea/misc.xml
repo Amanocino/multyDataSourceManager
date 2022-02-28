@@ -11,11 +11,13 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/dynamic-dataSource-seata1/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/02-api-dubbo/pom.xml" />
+        <option value="$PROJECT_DIR$/seata-server/pom.xml" />
       </set>
     </option>
   </component>

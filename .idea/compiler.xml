@@ -15,6 +15,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="02-api-dubbo" target="11" />
+      <module name="dynamic-dataSource (1)" target="11" />
+      <module name="seata-server" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -24,7 +26,9 @@
       <module name="common" options="-parameters" />
       <module name="consumer" options="-parameters" />
       <module name="dynamic-dataSource" options="-parameters" />
+      <module name="dynamic-dataSource (1)" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="seata-server" options="-parameters" />
     </option>
   </component>
 </project>

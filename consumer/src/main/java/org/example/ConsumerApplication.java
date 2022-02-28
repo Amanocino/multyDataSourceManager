@@ -3,12 +3,14 @@ package org.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author : zhicheng chen
  * @date : 2022/2/17
  * @time : 9:49
  */
+@EnableTransactionManagement
 @SpringBootApplication
 public class ConsumerApplication {
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.example.Service.DynamicDataSourceService;
 import org.example.common.BaseObjectModel;
@@ -67,6 +68,7 @@ public class ApiController {
      * @return
      */
 
+    @GlobalTransactional(name = "fsp-create-order",rollbackFor = Exception.class)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResultJson save(@Validated(value = ValidGroup.Crud.Create.class) @RequestBody BaseObjectModel params, HttpServletRequest request) throws Exception {
 

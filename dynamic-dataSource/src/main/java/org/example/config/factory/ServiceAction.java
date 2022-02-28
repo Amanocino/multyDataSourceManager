@@ -3,6 +3,7 @@ package org.example.config.factory;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 //import org.example.model.BaseObjectModel;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.example.Service.DynamicDataSourceService;
 import org.example.common.BaseObjectModel;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @DubboService
 @Component
-public class ServiceAction implements BaseServiceAction, DynamicDataSourceService {
+public class ServiceAction implements DynamicDataSourceService {
     @Autowired
     ServiceFactory serviceFactory;
     @Lazy
@@ -32,7 +33,7 @@ public class ServiceAction implements BaseServiceAction, DynamicDataSourceServic
 
 
     @Override
-    public Object save(BaseObjectModel baseObjectModel) throws IllegalAccessException {
+    public Object save(BaseObjectModel baseObjectModel) throws Exception {
 
         try{
             BaseService iService = serviceFactory.getService(baseObjectModel.getArticleId(), baseObjectModel.getTableName());
@@ -46,7 +47,7 @@ public class ServiceAction implements BaseServiceAction, DynamicDataSourceServic
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void saveObject(BaseService iService, Object obj) throws IllegalAccessException {
+    public void saveObject(BaseService iService, Object obj) throws Exception {
         try{
             iService.save(obj);
         }catch (Exception e){

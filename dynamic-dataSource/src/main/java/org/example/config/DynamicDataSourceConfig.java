@@ -1,9 +1,15 @@
 package org.example.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import io.seata.rm.datasource.DataSourceProxy;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.example.entity.DatabaseDetail;
+import org.springframework.beans.factory.annotation.Autowire;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +25,7 @@ import javax.sql.DataSource;
  * @date 2021/12/15
  */
 @Configuration
+@AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class DynamicDataSourceConfig {
 
     @Value("${dynamic-datasource.default.url}")
@@ -47,7 +54,7 @@ public class DynamicDataSourceConfig {
     @Bean
     @Primary
     public DynamicDataSource dynamicDataSource(DataSource defaultDataSource) {
-        return new DynamicDataSource(defaultDataSource);
+        return new DynamicDataSource(new DataSourceProxy(defaultDataSource));
     }
 
     static DataSource createDataSource(DatabaseDetail dbDetail) {
@@ -60,7 +67,8 @@ public class DynamicDataSourceConfig {
 //                .driverClassName(dbDetail.getDriverClassName())
 //                .username(dbDetail.getUsername())
 //                .password(dbDetail.getPassword()).build();
-        return druidDataSource;
+        return new DataSourceProxy(druidDataSource);
+//        return druidDataSource;
     }
 
 }
