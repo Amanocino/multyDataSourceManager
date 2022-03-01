@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.test.banma.mapper.Banma_Portaluser_msgMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.test.banma.domain.Banma_Portaluser_msgEntity">
+        <result column="userId" property="userId" />
+        <result column="msgId" property="msgId" />
+        <result column="flag" property="flag" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+</mapper>

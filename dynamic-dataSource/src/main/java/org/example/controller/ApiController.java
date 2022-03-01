@@ -1,15 +1,11 @@
 package org.example.controller;
 
-import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.example.Service.DynamicDataSourceService;
-import org.example.common.BaseObjectModel;
-import org.example.common.Dict;
-import org.example.common.ResultJson;
-import org.example.common.ValidGroup;
+import org.example.common.*;
 import org.example.config.factory.ServiceAction;
 import org.example.entity.User;
 //import org.example.model.BaseObjectModel;
+import org.example.service.DatabaseDetailService;
 import org.example.service.UserService;
 import org.example.service.impl.DynamicSqlService;
 import io.swagger.annotations.Api;
@@ -41,6 +37,8 @@ public class ApiController {
     private ServiceAction serviceAction;
     @Autowired
     private DynamicSqlService dynamicSqlService;
+    @Autowired
+    private DatabaseDetailService databaseDetailService;
 
     @Autowired
     private UserService userService;
@@ -61,6 +59,19 @@ public class ApiController {
         return 0;
     }
 
+    @ApiOperation(value = "获取租户数据库", notes = "获取各租户下的对应数据库")
+    @RequestMapping(value = "/databaseDetailByTenantId", method = RequestMethod.POST)
+    public ResultJson getDatabaseDetailByTenantId(@RequestBody BaseObjectModel params, HttpServletRequest request) {
+        if (null== params || null==params.getTenantId()){
+            return new ResultJson().error("查询失败，tenantId不能为空！");
+        }
+        DatabaseDetail databaseDetail = databaseDetailService.selectDatabaseDetailByTenantId(params.getTenantId().toString());
+        ResultJson resultJson = new ResultJson().success("查询成功");
+
+        resultJson.setData(databaseDetail);
+        return resultJson;
+    }
+
     /**
      * 保存数据
      * @param params
@@ -68,7 +79,6 @@ public class ApiController {
      * @return
      */
 
-    @GlobalTransactional(name = "fsp-create-order",rollbackFor = Exception.class)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResultJson save(@Validated(value = ValidGroup.Crud.Create.class) @RequestBody BaseObjectModel params, HttpServletRequest request) throws Exception {
 

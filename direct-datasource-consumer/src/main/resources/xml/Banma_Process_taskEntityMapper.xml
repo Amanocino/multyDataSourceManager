@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.test.banma.mapper.Banma_Process_taskMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.test.banma.domain.Banma_Process_taskEntity">
+        <id column="id" property="id" />
+        <result column="nodeName" property="nodeName" />
+        <result column="examineType" property="examineType" />
+        <result column="noHanderAction" property="noHanderAction" />
+        <result column="matchType" property="matchType" />
+        <result column="formkey" property="formkey" />
+        <result column="otherSetType" property="otherSetType" />
+        <result column="taskType" property="taskType" />
+        <result column="cc" property="cc" />
+        <result column="ccType" property="ccType" />
+        <result column="requiredComment" property="requiredComment" />
+        <result column="rejectSet" property="rejectSet" />
+        <result column="accessSet" property="accessSet" />
+        <result column="setType" property="setType" />
+        <result column="directorLevel" property="directorLevel" />
+        <result column="examineEndDirectorLevel" property="examineEndDirectorLevel" />
+        <result column="noDirectorAction" property="noDirectorAction" />
+        <result column="dataType" property="dataType" />
+        <result column="fillRule" property="fillRule" />
+        <result column="compounding" property="compounding" />
+        <result column="priorityLevel" property="priorityLevel" />
+        <result column="conditionList" property="conditionList" />
+        <result column="nodeUserList" property="nodeUserList" />
+        <result column="operatorId" property="operatorId" />
+        <result column="createtime" property="createtime" />
+        <result column="updatetime" property="updatetime" />
+        <result column="flag" property="flag" />
+        <result column="sort" property="sort" />
+        <result column="pid" property="pid" />
+        <result column="dataVersion" property="dataVersion" />
+        <result column="processId" property="processId" />
+        <result column="param1" property="param1" />
+        <result column="param2" property="param2" />
+        <result column="param3" property="param3" />
+    </resultMap>
+
+</mapper>

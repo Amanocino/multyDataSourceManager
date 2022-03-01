@@ -2,10 +2,6 @@ package org.example.config.factory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-//import org.example.model.BaseObjectModel;
-import io.seata.spring.annotation.GlobalTransactional;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.example.Service.DynamicDataSourceService;
 import org.example.common.BaseObjectModel;
 import org.example.model.QueryModel;
 import org.example.service.BaseService;
@@ -22,9 +18,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import java.io.Serializable;
 import java.util.List;
 
-@DubboService
 @Component
-public class ServiceAction implements DynamicDataSourceService {
+public class ServiceAction implements BaseServiceAction {
     @Autowired
     ServiceFactory serviceFactory;
     @Lazy

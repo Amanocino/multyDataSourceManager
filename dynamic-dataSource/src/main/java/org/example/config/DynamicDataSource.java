@@ -1,6 +1,6 @@
 package org.example.config;
 
-import org.example.entity.DatabaseDetail;
+import org.example.common.DatabaseDetail;
 import org.example.mapper.DatabaseDetailMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -52,27 +52,27 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     /**
      * 设置当前线程的数据源
      */
-    public void setCurrentThreadDataSource(String dataSourceKey) {
-        if (!targetDataSources.containsKey(dataSourceKey)) {
-            addNewDataSource(dataSourceKey);
-        }
-        CURRENT_DATASOURCE_KEY.set(dataSourceKey);
-    }
+//    public void setCurrentThreadDataSource(String dataSourceKey) {
+//        if (!targetDataSources.containsKey(dataSourceKey)) {
+//            addNewDataSource(dataSourceKey);
+//        }
+//        CURRENT_DATASOURCE_KEY.set(dataSourceKey);
+//    }
 
-    private synchronized void addNewDataSource(String dataSourceKey) {
-        if (targetDataSources.containsKey(dataSourceKey)) {
-            return;
-        }
-        DataSource datasource = createDataSource(dataSourceKey);
-        targetDataSources.put(dataSourceKey, datasource);
-        super.afterPropertiesSet();
-    }
+//    private synchronized void addNewDataSource(String dataSourceKey) {
+//        if (targetDataSources.containsKey(dataSourceKey)) {
+//            return;
+//        }
+//        DataSource datasource = createDataSource(dataSourceKey);
+//        targetDataSources.put(dataSourceKey, datasource);
+//        super.afterPropertiesSet();
+//    }
 
 
-    private DataSource createDataSource(String dataSourceKey) {
-        DatabaseDetail dbDetail = getDatabaseDetail(dataSourceKey);
-        return DynamicDataSourceConfig.createDataSource(dbDetail);
-    }
+//    private DataSource createDataSource(String dataSourceKey) {
+//        DatabaseDetail dbDetail = getDatabaseDetail(dataSourceKey);
+//        return DynamicDataSourceConfig.createDataSource(dbDetail);
+//    }
 
     // 数据库信息动态获取
     private DatabaseDetail getDatabaseDetail(String dataSourceKey) {

@@ -9,6 +9,9 @@
         <module>dynamic-dataSource</module>
         <module>gateway</module>
         <module>consumer</module>
+        <module>direct-datasource-consumer</module>
+        <module>dynamic-data-source-base-dubbo</module>
+        <module>dynamic-data-source-base-stander</module>
     </modules>
 
     <parent>

@@ -9,12 +9,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="dynamic-dataSource" />
         <module name="common" />
+        <module name="dynamic-data-source-base-stander" />
+        <module name="direct-datasource-consumer" />
         <module name="gateway" />
         <module name="consumer" />
+        <module name="dynamic-data-source-base" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="02-api-dubbo" target="11" />
+      <module name="dynamic-data-source-base-dubbo" target="11" />
       <module name="dynamic-dataSource (1)" target="11" />
       <module name="seata-server" target="11" />
     </bytecodeTargetLevel>
@@ -22,9 +26,13 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="02-api-dubbo" options="-parameters" />
-      <module name="cloud-dynamic-datasource" options="" />
+      <module name="cloud-dynamic-datasource" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="consumer" options="-parameters" />
+      <module name="direct-datasource-consumer" options="-parameters" />
+      <module name="dynamic-data-source-base" options="-parameters" />
+      <module name="dynamic-data-source-base-dubbo" options="-parameters" />
+      <module name="dynamic-data-source-base-stander" options="-parameters" />
       <module name="dynamic-dataSource" options="-parameters" />
       <module name="dynamic-dataSource (1)" options="-parameters" />
       <module name="gateway" options="-parameters" />

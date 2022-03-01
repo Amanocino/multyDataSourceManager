@@ -30,10 +30,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-        </dependency>
+
         <!--seata相关 开始-->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.cloud</groupId>-->

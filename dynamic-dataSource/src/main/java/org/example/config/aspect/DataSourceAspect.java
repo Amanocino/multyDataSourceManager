@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author amanoisuno
  * @date 2021/12/15
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class DataSourceAspect {
 
     @Autowired
@@ -35,20 +35,20 @@ public class DataSourceAspect {
      * //@Pointcut("@annotation(DynamicSwitchDataSource)")
      */
 //    @Pointcut("execution(public * org.example.controller..*.*(..))")
-    @Pointcut("(execution(public * org.example.config.factory.ServiceAction.*(..))) || (execution(public * org.example.service.impl.DynamicSqlService.*(..)))")
+//    @Pointcut("(execution(public * org.example.config.factory.ServiceAction.*(..))) || (execution(public * org.example.service.impl.DynamicSqlService.*(..)))")
     public void dataSourcePointCut() {
     }
 
-    @Before("dataSourcePointCut()")
+//    @Before("dataSourcePointCut()")
     public void beforeExecute(JoinPoint joinPoint) {
         String tenantId = getTenantIdFromSession(joinPoint);
         if (tenantId != null) {
-            dynamicDataSource.setCurrentThreadDataSource(tenantId);
+//            dynamicDataSource.setCurrentThreadDataSource(tenantId);
         }
 
     }
 
-    @After("dataSourcePointCut()")
+//    @After("dataSourcePointCut()")
     public void afterExecute() {
         DynamicDataSource.clearCurrentDataSourceKey();
     }

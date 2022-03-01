@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.anji.mapper.anjiLogin_tokenMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.example.anji.domain.anjiLogin_tokenEntity">
+        <result column="user_id" property="user_id" />
+        <result column="login_key" property="login_key" />
+        <result column="create_time" property="create_time" />
+        <result column="last_active_time" property="last_active_time" />
+        <result column="last_update_time" property="last_update_time" />
+        <result column="user_type" property="user_type" />
+        <result column="last_active_ip" property="last_active_ip" />
+        <result column="dept_id" property="dept_id" />
+        <result column="dept_name" property="dept_name" />
+        <result column="device_id" property="device_id" />
+        <result column="login_type" property="login_type" />
+    </resultMap>
+
+</mapper>

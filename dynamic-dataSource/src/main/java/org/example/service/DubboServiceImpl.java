@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.apache.dubbo.config.annotation.DubboService;
-import org.example.Service.DynamicDataSourceService;
 
 /**
  * @author : zhicheng chen

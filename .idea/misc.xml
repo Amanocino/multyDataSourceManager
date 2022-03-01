@@ -12,6 +12,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/dynamic-dataSource-seata1/pom.xml" />
+        <option value="$PROJECT_DIR$/dynamic-data-source-base-dubbo/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

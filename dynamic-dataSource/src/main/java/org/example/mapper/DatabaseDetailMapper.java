@@ -14,5 +14,5 @@ import org.apache.ibatis.annotations.Select;
 public interface DatabaseDetailMapper extends BaseMapper<DatabaseDetail> {
 
     @Select("select * from database_detail where tenant_id=#{tenantId} limit 1 ")
-    DatabaseDetail selectOneByTenantId(String tenantId);
+    org.example.common.DatabaseDetail selectOneByTenantId(String tenantId);
 }

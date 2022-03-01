@@ -14,44 +14,23 @@ dubbo:
     subscribed-services: dynamic-datasource-core
   consumer:
     timeout: 3000
+  spring:
+    application:
+      # Dubbo 应用名称
+      name: dubbo-consumer
+    main:
+      # Spring Boot 2.1 需要设定
+      allow-bean-definition-overriding: true
   registry:
     address: nacos://172.16.0.35:8848
   protocol:
     port: 20882
-    host: 192.168.200.150
 # 服务端口
 server:
   port: 8125
 
-
-seata:
-  enabled: true
-  enable-auto-data-source-proxy: true
-  tx-service-group: nacos_consumer_tx_group
-  grouplist: 172.16.0.20:8091
-  registry:
-    type: nacos
-    nacos:
-      application: seata-server
-      server-addr: 172.16.0.35:8848
-      group: SEATA_20
-      username: nacos
-      password: nacos
-  config:
-    type: nacos
-    nacos:
-      server-addr: 172.16.0.35:8848
-      group: SEATA_20
-      username: nacos
-      password: nacos
-      cluster: default
-  service:
-    vgroup-mapping:
-      nacos_consumer_tx_group: default
-    disable-global-transaction: false
-  client:
-    rm:
-      report-success-enable: false
-    tm:
-      rollbackRetryCount: '3'
-      commitRetryCount: '3'
+#mybatis-plus配置控制台打印完整带参数SQL语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false # 禁止大写变小写时自动添加下划线
