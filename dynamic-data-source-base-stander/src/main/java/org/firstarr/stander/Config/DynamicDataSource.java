@@ -1,12 +1,15 @@
 package org.firstarr.stander.Config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.example.Service.DynamicDataReSource;
 import org.example.common.DatabaseDetail;
+import org.firstarr.stander.mapper.DatabaseDetailMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -18,8 +21,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
-    @DubboReference
-    private DynamicDataReSource dynamicDataSourceService;
+    private DatabaseDetailMapper databaseDetailMapper = null;
+
+    JdbcTemplate jdbcTemplate;
     /**
      * 缓存当前线程数据源的key（租户id）
      */
@@ -76,12 +80,38 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         return DynamicDataSourceConfig.createDataSource(dbDetail);
     }
 
+    /**
+     * 拿到映射关系
+     *
+     * @return
+     */
+    private RowMapper getStudentMapper() {
+        return (resultSet, i) -> {
+            DatabaseDetail databaseDetail = new DatabaseDetail();
+            databaseDetail.setId(resultSet.getLong("id"));
+            databaseDetail.setDriverClassName(resultSet.getString("driverClassName"));
+            databaseDetail.setPassword(resultSet.getString("password"));
+            databaseDetail.setUrl(resultSet.getString("url"));
+            databaseDetail.setUsername(resultSet.getString("username"));
+            databaseDetail.setTenantId(resultSet.getString("tenant_id"));
+            return databaseDetail;
+        };
+    }
     // 数据库信息动态获取
     private DatabaseDetail getDatabaseDetail(String dataSourceKey) {
-        if (null == dynamicDataSourceService) {
-            return null;
+        if (null == jdbcTemplate) {
+            getDatabaseDetailMapper();
         }
-        return dynamicDataSourceService.queryDataSourceByTenantId(dataSourceKey);
+        String sql = "select * from database_detail where tenant_id=? limit 1";
+        Object[] param = new Object[]{dataSourceKey};
+        List<DatabaseDetail> databaseDetailList = jdbcTemplate.query(sql, param, getStudentMapper());
+        return databaseDetailList.get(0);
+    }
+
+    private synchronized void getDatabaseDetailMapper() {
+        if (null == jdbcTemplate) {
+            jdbcTemplate = SpringContextHolder.getBean(JdbcTemplate.class);
+        }
     }
 
 //    private synchronized void getDatabaseDetailMapper() {

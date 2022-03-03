@@ -1,7 +1,7 @@
 package org.test;
 
 import lombok.extern.slf4j.Slf4j;
-import org.firstarr.anno.EnableDynamicDataSourceSwift;
+import org.firstarr.stander.anno.EnableDynamicDataSourceSwift;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

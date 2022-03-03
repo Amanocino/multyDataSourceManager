@@ -1,7 +1,7 @@
 package org.test.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.firstarr.anno.DynamicDataSourceSwiftScan;
+import org.firstarr.stander.anno.DynamicDataSourceSwiftScan;
 import org.test.anji.domain.anjiDeptmentEntity;
 import org.test.anji.service.impl.anjiDeptmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

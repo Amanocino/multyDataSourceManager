@@ -2,9 +2,9 @@ package org.firstarr.stander.Config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.example.Service.DynamicDataReSource;
 import org.example.common.DatabaseDetail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -13,6 +13,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
@@ -26,12 +27,6 @@ import javax.sql.DataSource;
 @Configuration
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class DynamicDataSourceConfig {
-
-    @Value("${dynamic-datasource.default.tenantId}")
-    private String defaultTenantId;
-
-    @DubboReference
-    private DynamicDataReSource dynamicDataSourceService;
 
 //    @Bean("defaultDataSource")
 //    public DataSource defaultDataSource() {

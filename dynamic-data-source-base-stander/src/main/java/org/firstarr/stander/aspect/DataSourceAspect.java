@@ -39,7 +39,7 @@ public class DataSourceAspect {
 //    @Pointcut("@annotation(dynamicDataSourceSwiftScan)")
 //    public void dataSourcePointCut(DynamicDataSourceSwiftScan dynamicDataSourceSwiftScan) {
 //    }
-    @Pointcut("@within(org.firstarr.anno.DynamicDataSourceSwiftScan)")
+    @Pointcut("@within(org.firstarr.stander.anno.DynamicDataSourceSwiftScan)")
     public void dataSourcePointCut() {
     }
 
