@@ -12,6 +12,7 @@
         <module>direct-datasource-consumer</module>
         <module>dynamic-data-source-base-dubbo</module>
         <module>dynamic-data-source-base-stander</module>
+        <module>cloud-data-source-auth</module>
     </modules>
 
     <parent>
